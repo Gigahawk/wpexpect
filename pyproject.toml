@@ -13,6 +13,9 @@ readme = "README.md"
 requires-python = ">=3.11"
 dependencies = [
   "pexpect>=4.9.0",
-  "wexpect>=4.0.0 ; sys_platform == 'win32'",
+  "wexpect ; sys_platform == 'win32'",
   "setuptools >=76.1.0 ; sys_platform == 'win32'"
 ]
+
+[tool.uv.sources]
+wexpect = {git = "https://github.com/Gigahawk/wexpect.git", branch = "migrate-pkg_resources"}
