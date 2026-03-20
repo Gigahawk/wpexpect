@@ -71,20 +71,20 @@
 
           ## TODO: Add tests to package?
           ## Based on https://pyproject-nix.github.io/uv2nix/patterns/testing.html
-          ## Doesn't seem to work, hello package isn't found
-          #hello = prev.hello.overrideAttrs (old: {
+          ## Doesn't seem to work, wpexpect package isn't found
+          #wpexpect = prev.wpexpect.overrideAttrs (old: {
           #  passthru = old.passthru // {
           #    tests =
           #      let
-          #        _virtualenv = final.mkVirtualEnv "hello-pytest-env" workspace.deps.all // {
-          #          hello = [ "dev" ];
+          #        _virtualenv = final.mkVirtualEnv "wpexpect-pytest-env" workspace.deps.all // {
+          #          wpexpect = [ "dev" ];
           #        };
           #      in
           #      (old.tests or { })
           #      // {
           #        pytest = pkgs.stdenv.mkDerivation {
-          #          name = "${final.hello.name}-pytest";
-          #          inherit (final.hello) src;
+          #          name = "${final.wpexpect.name}-pytest";
+          #          inherit (final.wpexpect) src;
           #          nativeBuildInputs = [
           #            virtualenv
           #            _virtualenv
@@ -114,7 +114,7 @@
             );
 
         editablePythonSet = pythonSet.overrideScope editableOverlay;
-        virtualenv = editablePythonSet.mkVirtualEnv "hello-dev-env" workspace.deps.all;
+        virtualenv = editablePythonSet.mkVirtualEnv "wpexpect-dev-env" workspace.deps.all;
 
         inherit (pkgs.callPackages pyproject-nix.build.util { }) mkApplication;
 
@@ -122,17 +122,17 @@
       in
       {
         packages = {
-          hello = mkApplication {
-            venv = pythonSet.mkVirtualEnv "hello-app-env" workspace.deps.default;
-            package = pythonSet.hello;
+          wpexpect = mkApplication {
+            venv = pythonSet.mkVirtualEnv "wpexpect-app-env" workspace.deps.default;
+            package = pythonSet.wpexpect;
           };
-          default = self.packages.${system}.hello;
+          default = self.packages.${system}.wpexpect;
         };
         formatter = treefmtEval.config.build.wrapper;
         checks = {
           formatting = treefmtEval.config.build.check self;
           # Doesn't seem to work
-          # pytest = editablePythonSet.hello.passthru.tests.pytest;
+          # pytest = editablePythonSet.wpexpect.passthru.tests.pytest;
         };
         devShells = {
           default = pkgs.mkShell {
