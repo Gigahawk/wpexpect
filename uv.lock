@@ -132,8 +132,8 @@ wheels = [
 
 [[package]]
 name = "wexpect"
-version = "0.0.1.dev196"
-source = { git = "https://github.com/Gigahawk/wexpect.git?branch=personal-dev#ee998c341e2b5a94c6a17f14fb18b8817d37efe6" }
+version = "0.0.1.dev197"
+source = { git = "https://github.com/Gigahawk/wexpect.git?branch=personal-dev#731b16983916b5b5f5528f14395b45e9727ee9c9" }
 dependencies = [
     { name = "psutil", marker = "sys_platform == 'win32'" },
     { name = "pywin32", marker = "sys_platform == 'win32'" },
