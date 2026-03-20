@@ -14,4 +14,4 @@ if sys.platform == "win32":
         }
     )
 else:
-    from pexpect import *
+    from pexpect import *  # noqa: F403
