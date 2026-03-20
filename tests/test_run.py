@@ -1,6 +1,5 @@
 import sys
 import os
-import re
 
 import wpexpect
 
@@ -10,43 +9,27 @@ def test_print_system():
 
 
 _runenv = os.environ.copy()
-_runenv["PS1"] = "GO:"
+_runenv["PS1"] = "Microsoft>"
 
 
-# Borrowed from pexpect test_run.py, test_run_event_as_string
-def test_run_unix():
+# Borrowed from pexpect/wexpect test_run.py, test_run_event_as_string
+def test_run_event_as_string():
     if sys.platform == "win32":
-        return
-    events = [
-        # second match on 'abc', echo 'def'
-        ("abc\r\n.*GO:", 'echo "def"\n'),
-        # final match on 'def': exit
-        ("def\r\n.*GO:", "exit\n"),
-        # first match on 'GO:' prompt, echo 'abc'
-        ("GO:", 'echo "abc"\n'),
-    ]
-
-    (_, exitstatus) = wpexpect.run(
-        "bash --norc", withexitstatus=True, events=events, env=_runenv, timeout=10
-    )
-    assert exitstatus == 0
-
-
-# Borrowed from wexpect test_run.py, test_run_event_as_string
-def test_run_win():
-    if sys.platform != "win32":
-        return
-    re_flags = re.DOTALL | re.MULTILINE
+        shell = "cmd"
+        le = "\r\n"
+    else:
+        shell = "bash --norc"
+        le = "\n"
     events = {
         # second match on 'abc', echo 'def'
-        re.compile("abc.*>", re_flags): 'echo "def"\r\n',
+        "abc.*>": f'echo "def"{le}',
         # final match on 'def': exit
-        re.compile("def.*>", re_flags): "exit\r\n",
+        "def.*>": f"exit{le}",
         # first match on 'GO:' prompt, echo 'abc'
-        re.compile("Microsoft.*>", re_flags): 'echo "abc"\r\n',
+        "Microsoft.*>": f'echo "abc"{le}',
     }
 
-    (data, exitstatus) = wpexpect.run(
-        "cmd", withexitstatus=True, events=events, timeout=5
+    (_, exitstatus) = wpexpect.run(
+        shell, withexitstatus=True, events=events, env=_runenv, timeout=10
     )
     assert exitstatus == 0
