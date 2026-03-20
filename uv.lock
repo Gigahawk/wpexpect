@@ -132,8 +132,8 @@ wheels = [
 
 [[package]]
 name = "wexpect"
-version = "0.0.1.dev200"
-source = { git = "https://github.com/Gigahawk/wexpect.git?branch=migrate-pkg_resources#d89c0e3d2823f3120a2c9c7089a9dafda4de5164" }
+version = "0.0.1.dev196"
+source = { git = "https://github.com/Gigahawk/wexpect.git?branch=personal-dev#ee998c341e2b5a94c6a17f14fb18b8817d37efe6" }
 dependencies = [
     { name = "psutil", marker = "sys_platform == 'win32'" },
     { name = "pywin32", marker = "sys_platform == 'win32'" },
@@ -158,7 +158,7 @@ dev = [
 requires-dist = [
     { name = "pexpect", specifier = ">=4.9.0" },
     { name = "setuptools", marker = "sys_platform == 'win32'", specifier = ">=76.1.0" },
-    { name = "wexpect", marker = "sys_platform == 'win32'", git = "https://github.com/Gigahawk/wexpect.git?branch=migrate-pkg_resources" },
+    { name = "wexpect", marker = "sys_platform == 'win32'", git = "https://github.com/Gigahawk/wexpect.git?branch=personal-dev" },
 ]
 
 [package.metadata.requires-dev]

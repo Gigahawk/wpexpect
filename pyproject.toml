@@ -18,4 +18,4 @@ dependencies = [
 ]
 
 [tool.uv.sources]
-wexpect = {git = "https://github.com/Gigahawk/wexpect.git", branch = "migrate-pkg_resources"}
+wexpect = {git = "https://github.com/Gigahawk/wexpect.git", branch = "personal-dev"}
