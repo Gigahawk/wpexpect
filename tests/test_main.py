@@ -1,6 +1,11 @@
+import sys
 import os
 
 import wpexpect
+
+
+def test_print_system():
+    print(f"RUNNING ON PLATFORM: {sys.platform}")
 
 
 _runenv = os.environ.copy()
